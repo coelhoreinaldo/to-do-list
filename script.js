@@ -11,6 +11,9 @@ const clickTask = () => {
 
   for (let i = 0; i < taskItems.length; i += 1) {
     taskItems[i].addEventListener('click', () => {
+      for (let j = 0; j < taskItems.length; j += 1) {
+        taskItems[j].style.backgroundColor = 'white';
+      }
       taskItems[i].style.backgroundColor = 'rgb(128, 128, 128)';
     });
   }
