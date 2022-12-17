@@ -6,22 +6,6 @@ const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
 };
 
-const addTask = () => {
-  createTaskBtn.addEventListener('click', () => {
-    const inputValue = input.value;
-
-    const createTask = document.createElement('li');
-    createTask.className = 'task-item';
-    createTask.innerHTML = inputValue;
-    taskList.appendChild(createTask);
-
-    taskItemsLocalStorage();
-    input.value = '';
-  });
-};
-
-addTask();
-
 const clickTask = () => {
   const taskItems = document.querySelectorAll('.task-item');
 
@@ -33,9 +17,27 @@ const clickTask = () => {
   console.log(taskItems);
 };
 
+const addTask = () => {
+  createTaskBtn.addEventListener('click', () => {
+    const inputValue = input.value;
+
+    const createTask = document.createElement('li');
+    createTask.className = 'task-item';
+    createTask.innerHTML = inputValue;
+    taskList.appendChild(createTask);
+
+    taskItemsLocalStorage();
+    input.value = '';
+    clickTask();
+  });
+};
+
+addTask();
+
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
   taskList.innerHTML = getTaskItem;
+
   clickTask();
 };
 
