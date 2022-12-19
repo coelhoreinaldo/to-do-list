@@ -6,7 +6,7 @@ const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
 };
 
-const clickTask = () => {
+const paintTask = () => {
   const taskItems = document.querySelectorAll('.task-item');
 
   for (let i = 0; i < taskItems.length; i += 1) {
@@ -31,23 +31,36 @@ const addTask = () => {
 
     taskItemsLocalStorage();
     input.value = '';
-    clickTask();
+    paintTask();
   });
 };
 
 addTask();
 
+const addLineThrough = () => {
+  const taskItems = document.querySelectorAll('.task-item');
+  for (let i = 0; i < taskItems.length; i += 1) {
+    taskItems[i].addEventListener('dblclick', () => {
+      taskItems[i].classList.toggle('completed');
+    });
+  }
+};
+
+addLineThrough();
+
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
   taskList.innerHTML = getTaskItem;
-
-  clickTask();
+  paintTask();
+  addLineThrough();
 };
 
-// Ao clicar em um item da lista, este deve adquirir a cor adicionada à folha de estilo com o padrão: `background-color: nome-da-cor`, não sendo permitido qualquer outro padrão de nomenclatura de cores.
+// Crie uma classe CSS com o nome "completed" e defina a propriedade "text-decoration" com o valor "line-through". Utilize a classe CSS "completed" para adicionar o efeito de letra tachada (riscada) às tarefas finalizadas.
 
 // O que será testado:
 
-// A página ao ser carregada deve possuir os itens da lista sem o estilo CSS background-color: gray;
+// Antes da ação ser disparada, o elemento adicionado à lista não deve possuir a classe completed nem o estilo text-decoration: line-through solid black;
 
-// Os itens da lista ao serem clicados devem passar a ter o estilo CSS background-color: gray.
+// O item da lista ao receber duplo clique deve passar a ter a classe completed e o estilo text-decoration com o valor line-through solid black;
+
+// O item da lista ao receber um segundo duplo clique, não deve mais possuir a classe completed nem o estilo text-decoration: line-through solid black.
