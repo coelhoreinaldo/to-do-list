@@ -37,22 +37,15 @@ const addTask = () => {
 
 addTask();
 
-const addLineThrough = () => {
-  const taskItems = document.querySelectorAll('.task-item');
-  for (let i = 0; i < taskItems.length; i += 1) {
-    taskItems[i].addEventListener('dblclick', () => {
-      taskItems[i].classList.toggle('completed');
-    });
-  }
-};
-
-addLineThrough();
+taskList.addEventListener('dblclick', (event) => {
+  event.target.classList.toggle('completed');
+});
+// };
 
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
   taskList.innerHTML = getTaskItem;
   paintTask();
-  addLineThrough();
 };
 
 // Crie uma classe CSS com o nome "completed" e defina a propriedade "text-decoration" com o valor "line-through". Utilize a classe CSS "completed" para adicionar o efeito de letra tachada (riscada) às tarefas finalizadas.
