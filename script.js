@@ -1,6 +1,7 @@
 const createTaskBtn = document.querySelector('#criar-tarefa');
 const input = document.querySelector('#texto-tarefa');
 const taskList = document.querySelector('#lista-tarefas');
+const clearAllBtn = document.getElementById('apaga-tudo');
 
 const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
@@ -17,7 +18,6 @@ const paintTask = () => {
       taskItems[i].style.backgroundColor = 'rgb(128, 128, 128)';
     });
   }
-  console.log(taskItems);
 };
 
 const addTask = () => {
@@ -39,21 +39,21 @@ addTask();
 
 taskList.addEventListener('dblclick', (event) => {
   event.target.classList.toggle('completed');
+  taskItemsLocalStorage();
 });
-// };
 
+clearAllBtn.addEventListener('click', () => {
+  taskList.innerHTML = '';
+});
+// Adicione um botão com id="apaga-tudo" que quando clicado deve apagar todos os itens da lista
+
+// O que será testado:
+
+// A página deve possuir um elemento button com o ID apaga-tudo;
+
+// Dado que uma lista possua tarefas, ao dar um clique no botão a lista deve ficar vazia.
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
   taskList.innerHTML = getTaskItem;
   paintTask();
 };
-
-// Crie uma classe CSS com o nome "completed" e defina a propriedade "text-decoration" com o valor "line-through". Utilize a classe CSS "completed" para adicionar o efeito de letra tachada (riscada) às tarefas finalizadas.
-
-// O que será testado:
-
-// Antes da ação ser disparada, o elemento adicionado à lista não deve possuir a classe completed nem o estilo text-decoration: line-through solid black;
-
-// O item da lista ao receber duplo clique deve passar a ter a classe completed e o estilo text-decoration com o valor line-through solid black;
-
-// O item da lista ao receber um segundo duplo clique, não deve mais possuir a classe completed nem o estilo text-decoration: line-through solid black.
