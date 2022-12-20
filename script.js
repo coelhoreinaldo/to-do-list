@@ -2,6 +2,7 @@ const createTaskBtn = document.querySelector('#criar-tarefa');
 const input = document.querySelector('#texto-tarefa');
 const taskList = document.querySelector('#lista-tarefas');
 const clearAllBtn = document.getElementById('apaga-tudo');
+const removeCompletedItems = document.getElementById('remover-finalizados');
 
 const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
@@ -45,13 +46,14 @@ taskList.addEventListener('dblclick', (event) => {
 clearAllBtn.addEventListener('click', () => {
   taskList.innerHTML = '';
 });
-// Adicione um botão com id="apaga-tudo" que quando clicado deve apagar todos os itens da lista
 
-// O que será testado:
+removeCompletedItems.addEventListener('click', () => {
+  const items = taskList.querySelectorAll('.completed');
+  for (let i = 0; i < items.length; i += 1) {
+    items[i].remove();
+  }
+});
 
-// A página deve possuir um elemento button com o ID apaga-tudo;
-
-// Dado que uma lista possua tarefas, ao dar um clique no botão a lista deve ficar vazia.
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
   taskList.innerHTML = getTaskItem;
