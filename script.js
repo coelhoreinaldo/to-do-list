@@ -3,6 +3,7 @@ const input = document.querySelector('#texto-tarefa');
 const taskList = document.querySelector('#lista-tarefas');
 const clearAllBtn = document.getElementById('apaga-tudo');
 const removeCompletedItems = document.getElementById('remover-finalizados');
+const saveTasks = document.getElementById('salvar-tarefas');
 
 const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
@@ -30,7 +31,7 @@ const addTask = () => {
     createTask.innerHTML = inputValue;
     taskList.appendChild(createTask);
 
-    taskItemsLocalStorage();
+    // taskItemsLocalStorage();
     input.value = '';
     paintTask();
   });
@@ -40,7 +41,7 @@ addTask();
 
 taskList.addEventListener('dblclick', (event) => {
   event.target.classList.toggle('completed');
-  taskItemsLocalStorage();
+  // taskItemsLocalStorage();
 });
 
 clearAllBtn.addEventListener('click', () => {
@@ -53,6 +54,8 @@ removeCompletedItems.addEventListener('click', () => {
     items[i].remove();
   }
 });
+
+saveTasks.addEventListener('click', taskItemsLocalStorage);
 
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
