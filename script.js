@@ -4,9 +4,9 @@ const taskList = document.querySelector('#lista-tarefas');
 const clearAllBtn = document.getElementById('apaga-tudo');
 const removeCompletedItems = document.getElementById('remover-finalizados');
 const saveTasks = document.getElementById('salvar-tarefas');
-const moveUp = document.getElementById('mover-cima');
-const moveDown = document.getElementById('mover-baixo');
-const selectedItems = document.getElementsByClassName('selected');
+const moveUpBtn = document.getElementById('mover-cima');
+const moveDownBtn = document.getElementById('mover-baixo');
+const selected = document.getElementsByClassName('selected');
 
 const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
@@ -58,10 +58,25 @@ removeCompletedItems.addEventListener('click', () => {
 
 saveTasks.addEventListener('click', taskItemsLocalStorage);
 
-// moveUp.addEventListener('click', () => {
-// const selectedItem = document.getElementsByClassName
-// });
-// minhas dicas: ao invés de só atribuir cinza pro bagulho, criar uma classe e no css meter cinza pra essa classe, e botar branco pra classe natural dos itens
+const moveUp = () => {
+  const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
+  const previousElement = selected[0] ? selected[0].previousElementSibling : undefined;
+  if (previousElement !== null) {
+    selectedParentNode ? selectedParentNode.insertBefore(selected[0], previousElement) : undefined;
+  }
+};
+
+const moveDown = () => {
+  const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
+  const selNextElement = selected[0] ? selected[0].nextElementSibling?.nextElementSibling : undefined;
+    if (selected[0] ? selected[0].nextElementSibling !== null : undefined) {
+      selectedParentNode ? selectedParentNode.insertBefore(selected[0], selNextElement) : undefined;
+    }
+};
+
+moveUpBtn.addEventListener('click', moveUp);
+
+moveDownBtn.addEventListener('click', moveDown);
 
 // A página deve possuir dois elementos button, um com o ID mover-cima e o outro com o ID mover-baixo;
 
