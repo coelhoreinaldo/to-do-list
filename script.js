@@ -60,19 +60,21 @@ removeCompletedItems.addEventListener('click', () => {
 saveTasks.addEventListener('click', taskItemsLocalStorage);
 
 const moveUp = () => {
-  const previousElement = selected[0] ? selected[0].previousElementSibling : undefined;
-  if (previousElement !== null) {
-    const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
-    selectedParentNode ? selectedParentNode.insertBefore(selected[0], previousElement) : undefined;
+  if (selected[0] && selected[0] !== null) {
+    const selectedParentNode = selected[0].parentNode;
+    const previousElement = selected[0].previousElementSibling;
+    if (previousElement && selectedParentNode) {
+      selectedParentNode.insertBefore(selected[0], previousElement);
+    }
   }
 };
 
 const moveDown = () => {
   if (selected[0] && selected[0] !== null) {
-    const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
-    if (selected[0].nextElementSibling) {
+    const selectedParentNode = selected[0].parentNode;
+    if (selected[0].nextElementSibling && selectedParentNode) {
       const selNextElement = selected[0].nextElementSibling.nextElementSibling;
-      selectedParentNode ? selectedParentNode.insertBefore(selected[0], selNextElement) : undefined;
+      selectedParentNode.insertBefore(selected[0], selNextElement);
     }
   }
 };
