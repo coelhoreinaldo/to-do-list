@@ -70,8 +70,10 @@ const moveUp = () => {
 const moveDown = () => {
   if (selected[0] && selected[0] !== null) {
     const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
-    const selNextElement = selected[0].nextElementSibling?.nextElementSibling;
-    selectedParentNode ? selectedParentNode.insertBefore(selected[0], selNextElement) : undefined;
+    if (selected[0].nextElementSibling) {
+      const selNextElement = selected[0].nextElementSibling.nextElementSibling;
+      selectedParentNode ? selectedParentNode.insertBefore(selected[0], selNextElement) : undefined;
+    }
   }
 };
 
@@ -83,7 +85,7 @@ removeSelected.addEventListener('click', () => {
   for (let i = 0; i < selected.length; i += 1) {
     selected[i].remove();
   }
-})
+});
 
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
