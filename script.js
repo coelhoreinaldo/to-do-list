@@ -7,6 +7,7 @@ const saveTasks = document.getElementById('salvar-tarefas');
 const moveUpBtn = document.getElementById('mover-cima');
 const moveDownBtn = document.getElementById('mover-baixo');
 const selected = document.getElementsByClassName('selected');
+const removeSelected = document.getElementById('remover-selecionado');
 
 const taskItemsLocalStorage = () => {
   localStorage.setItem('taskItem', taskList.innerHTML);
@@ -59,36 +60,31 @@ removeCompletedItems.addEventListener('click', () => {
 saveTasks.addEventListener('click', taskItemsLocalStorage);
 
 const moveUp = () => {
-  const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
   const previousElement = selected[0] ? selected[0].previousElementSibling : undefined;
   if (previousElement !== null) {
+    const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
     selectedParentNode ? selectedParentNode.insertBefore(selected[0], previousElement) : undefined;
   }
 };
 
 const moveDown = () => {
-  const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
-  const selNextElement = selected[0] ? selected[0].nextElementSibling?.nextElementSibling : undefined;
-    if (selected[0] ? selected[0].nextElementSibling !== null : undefined) {
-      selectedParentNode ? selectedParentNode.insertBefore(selected[0], selNextElement) : undefined;
-    }
+  if (selected[0] && selected[0] !== null) {
+    const selectedParentNode = selected[0] ? selected[0].parentNode : undefined;
+    const selNextElement = selected[0].nextElementSibling?.nextElementSibling;
+    selectedParentNode ? selectedParentNode.insertBefore(selected[0], selNextElement) : undefined;
+  }
 };
 
 moveUpBtn.addEventListener('click', moveUp);
 
 moveDownBtn.addEventListener('click', moveDown);
 
-// A página deve possuir dois elementos button, um com o ID mover-cima e o outro com o ID mover-baixo;
+removeSelected.addEventListener('click', () => {
+  for (let i = 0; i < selected.length; i += 1) {
+    selected[i].remove();
+  }
+})
 
-// Dado que diversos elementos foram acrescentados à lista, movimentá-los de formas diversas deve deixá-los permanecer nas posições esperadas;
-
-// Caso algum elemento esteja finalizado, este status deve persistir ainda que se mova o elemento;
-
-// Caso nenhum elemento esteja selecionado, ao clicar nos botões a lista não deve ser alterada;
-
-// Um elemento que esteja selecionado deve se manter selecionado mesmo depois de movido;
-
-// Caso especial! Será verificado que, caso se tente subir o elemento no topo da lista ou, caso se tente descer o último elemento da lista, esta não deve ser alterada.
 window.onload = () => {
   const getTaskItem = localStorage.getItem('taskItem');
   taskList.innerHTML = getTaskItem;
