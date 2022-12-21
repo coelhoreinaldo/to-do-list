@@ -1,6 +1,39 @@
-/* * {
-  a
-} */
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 25%;
+  margin: 32px auto;
+}
+
+header {
+  text-align: center;
+  background-color: rgb(76 , 139 , 245);
+  padding: 16px;
+  color: aliceblue;
+}
+
+p {
+  margin: 16px 0;
+}
+
+#texto-tarefa {
+  width: 100px;
+  box-sizing: border-box;
+  border: 2px solid rgb(174 , 168 , 168);
+  border-radius: 4px;
+  background-color: rgb(141 , 200 , 245);
+  padding: 8px 20px;
+  transition: width 0.4s ease-in-out;
+  margin-bottom: 32px;
+}
+
+#texto-tarefa:focus {
+  width: 100%;
+}
 
 .completed {
   text-decoration: line-through;
@@ -8,4 +41,22 @@
 
 .selected {
   background-color: gray;
+}
+
+#buttons {
+  margin: 32px 0;
+  float: right;
+  display: flex;
+}
+
+button {
+  margin: 2px;
+}
+
+button:hover {
+  background-color: rgb(141 , 200 , 245);
+}
+
+#move-tasks {
+  width: 100px;
 }
