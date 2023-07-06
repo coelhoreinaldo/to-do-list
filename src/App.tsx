@@ -71,6 +71,11 @@ function App() {
     setTasks([]);
   };
 
+  const handleClearCompleted = () => {
+    const updatedTasks = tasks.filter((item) => !item.completed);
+    setTasks(updatedTasks);
+  };
+
   return (
     <Main>
       <Header />
@@ -102,6 +107,7 @@ function App() {
         </List>
         <button type="submit">Adicionar</button>
         <button type="reset">Deletar tudo</button>
+        <button type="button" onClick={ handleClearCompleted }>Limpar finalizadas</button>
       </form>
 
     </Main>
