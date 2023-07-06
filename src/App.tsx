@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
+import Header from './components/Header';
 
 const Main = styled.main`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-`;
-
-const Header = styled.header`
-  position:fixed;
-  top: 0;
-  display: flex;
-  flex-direction: column;
+  margin-top: 160px;
 `;
 
 interface Task {
@@ -32,6 +26,11 @@ function App() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!task) {
+      return;
+    }
+
     const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
     const newTask = {
       id: newId,
@@ -43,10 +42,7 @@ function App() {
 
   return (
     <Main>
-      <Header>
-        <h1>To do list</h1>
-        <h2>Clique duas vezes em um item para marcá-lo como completo.</h2>
-      </Header>
+      <Header />
       <form onSubmit={ handleSubmit }>
         <label>
           <input
