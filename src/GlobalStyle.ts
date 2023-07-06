@@ -39,6 +39,8 @@ const GlobalStyle = createGlobalStyle`
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
+    background-color: black;
+    color: white;
   }
 
   h1 {

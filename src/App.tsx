@@ -20,7 +20,7 @@ const List = styled.ul`
 
 const ListItem = styled.li<{ completed: boolean, isSelected: boolean }>`
   text-decoration: ${(props) => (props.completed ? 'line-through' : 'none')};
-  background-color: ${(props) => (props.isSelected ? 'aquamarine' : 'transparent')};
+  background-color: ${(props) => (props.isSelected ? 'darkblue' : 'transparent')};
 
 `;
 
@@ -67,10 +67,14 @@ function App() {
     setSelectedId(id);
   };
 
+  const handleDeleteAll = () => {
+    setTasks([]);
+  };
+
   return (
     <Main>
       <Header />
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ handleSubmit } onReset={ handleDeleteAll }>
         <label>
           <input
             type="text"
@@ -97,6 +101,7 @@ function App() {
           ))}
         </List>
         <button type="submit">Adicionar</button>
+        <button type="reset">Deletar tudo</button>
       </form>
 
     </Main>
