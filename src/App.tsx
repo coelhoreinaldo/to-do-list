@@ -11,9 +11,22 @@ const Main = styled.main`
   margin-top: 160px;
 `;
 
+const List = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+const ListItem = styled.li<{ completed: boolean }>`
+  background-color: ${(props) => (props.completed ? 'green' : 'transparent')};
+`;
+
 interface Task {
   id: number;
   name: string;
+  completed: boolean;
 }
 
 function App() {
@@ -35,9 +48,17 @@ function App() {
     const newTask = {
       id: newId,
       name: task,
+      completed: false,
     };
     setTasks([...tasks, newTask]);
     setTask('');
+  };
+
+  const handleUpdate = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedTasks = tasks.map((item) => (
+      item.id === +event.target.id ? { ...item, completed: !item.completed } : item
+    ));
+    setTasks(updatedTasks);
   };
 
   return (
@@ -52,9 +73,18 @@ function App() {
             value={ task }
           />
         </label>
-        <ol>
-          {tasks.map((item) => <li key={ item.id }>{item.name}</li>)}
-        </ol>
+        <List>
+          {tasks.map((item) => (
+            <ListItem as="li" key={ item.id } completed={ item.completed }>
+              <input
+                type="checkbox"
+                id={ `${item.id}` }
+                onChange={ handleUpdate }
+              />
+              <label>{item.name}</label>
+            </ListItem>
+          ))}
+        </List>
         <button type="submit">Adicionar</button>
       </form>
 
