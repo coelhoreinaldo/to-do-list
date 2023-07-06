@@ -19,8 +19,10 @@ const List = styled.ul`
   justify-content: center;
 `;
 
-const ListItem = styled.li<{ completed: boolean }>`
-  background-color: ${(props) => (props.completed ? 'green' : 'transparent')};
+const ListItem = styled.li<{ completed: boolean, isSelected: boolean }>`
+  text-decoration: ${(props) => (props.completed ? 'line-through' : 'none')};
+  background-color: ${(props) => (props.isSelected ? 'aquamarine' : 'transparent')};
+
 `;
 
 interface Task {
@@ -32,6 +34,7 @@ interface Task {
 function App() {
   const [task, setTask] = useState<string>('');
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
@@ -61,6 +64,10 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const handleSelected = (id:number) => {
+    setSelectedId(id);
+  };
+
   return (
     <Main>
       <Header />
@@ -75,7 +82,12 @@ function App() {
         </label>
         <List>
           {tasks.map((item) => (
-            <ListItem as="li" key={ item.id } completed={ item.completed }>
+            <ListItem
+              key={ item.id }
+              completed={ item.completed }
+              isSelected={ selectedId === item.id }
+              onClick={ () => handleSelected(item.id) }
+            >
               <input
                 type="checkbox"
                 id={ `${item.id}` }
