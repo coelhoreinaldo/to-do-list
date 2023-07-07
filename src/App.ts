@@ -16,6 +16,7 @@ export const Form = styled.form`
   min-height: 260px;
   padding: 8px;
   max-width: 460px;
+  min-width: 280px;
 `;
 
 export const Div = styled.div`
@@ -24,6 +25,10 @@ export const Div = styled.div`
   width: 100%;
   align-items: center;
   gap: 8px;
+`;
+
+export const AddTaskDiv = styled(Div)`
+  justify-content: space-between;
 `;
 
 export const ListItemButtons = styled(Div)`
@@ -37,11 +42,12 @@ export const List = styled.ul`
   align-items: flex-start;
   justify-content: center;
   padding: 0;
-  gap: 8px;
+  gap: 4px;
+  min-height: 100px;
+
 `;
 
-export const ListItem = styled.li<{ $completed: boolean, $isSelected: boolean }>`
-  text-decoration: ${(props) => (props.$completed && 'line-through')};
+export const ListItem = styled.li<{ $isSelected: boolean }>`
   background-color: ${(props) => props.$isSelected && 'purple'};
   transform: ${(props) => props.$isSelected && 'translateY(-6px)'};
   box-shadow: ${(props) => props.$isSelected && 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'};
@@ -52,10 +58,11 @@ export const ListItem = styled.li<{ $completed: boolean, $isSelected: boolean }>
   border: ${(props) => props.$isSelected && '1px solid red'};
   display: flex;
   justify-content: space-between;
-
+  padding: 8px 0;
 `;
 
 export const Input = styled.input`
+
   width: 30%;
   box-sizing: border-box;
   border: 2px solid rgb(174 , 168 , 168);
@@ -67,6 +74,11 @@ export const Input = styled.input`
   &:focus {
     width: 100%;
   };
+`;
+
+export const Label = styled.label<{ $completed: boolean }>`
+  text-decoration: ${(props) => (props.$completed && 'line-through')};
+  color: ${(props) => props.$completed && 'gray'};
 `;
 
 export const Button = styled.button<{ $color?: string }>`

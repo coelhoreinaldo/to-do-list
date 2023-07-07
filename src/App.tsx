@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
-import { Button, Div, Form, Input, List, ListItem, ListItemButtons, Main } from './App';
+import { AddTaskDiv,
+  Button, Div, Form, Input, Label, List, ListItem, ListItemButtons, Main } from './App';
 
 interface Task {
   id: number;
@@ -122,7 +123,7 @@ function App() {
     <Main>
       <Header />
       <Form onSubmit={ handleSubmit } onReset={ handleDeleteAll }>
-        <Div>
+        <AddTaskDiv>
           <Input
             type="text"
             placeholder="Digite uma tarefa..."
@@ -134,14 +135,13 @@ function App() {
               ? 'Adicionar' : 'Editar'}
 
           </Button>
-        </Div>
+        </AddTaskDiv>
         <List>
           {tasks.map((item) => (
             <ListItem
               key={ item.id }
-              $completed={ item.completed }
-              $isSelected={ selectedId === item.id }
               onClick={ () => handleSelected(item.id) }
+              $isSelected={ selectedId === item.id }
             >
               <Div>
                 <input
@@ -149,7 +149,12 @@ function App() {
                   id={ `${item.id}` }
                   onChange={ handleUpdate }
                 />
-                <label>{item.name}</label>
+                <Label
+                  $completed={ item.completed }
+                >
+                  {item.name}
+
+                </Label>
               </Div>
               <ListItemButtons>
 
@@ -157,7 +162,7 @@ function App() {
                   type="button"
                   onClick={ () => handleUpdateSelected(item) }
                 >
-                  Editar
+                  🖊
 
                 </Button>
                 <Button
@@ -165,7 +170,7 @@ function App() {
                   $color="red"
                   onClick={ () => handleDeleteSelected(item) }
                 >
-                  Delete
+                  🗑
 
                 </Button>
               </ListItemButtons>
@@ -178,7 +183,7 @@ function App() {
             onClick={ handleMoveUp }
             disabled={ !selectedId }
           >
-            Mover para cima
+            ↑
 
           </Button>
           <Button
@@ -186,11 +191,9 @@ function App() {
             onClick={ handleMoveDown }
             disabled={ !selectedId }
           >
-            Mover para baixo
+            ↓
 
           </Button>
-        </Div>
-        <Div>
           <Button type="reset" $color="red">Deletar tudo</Button>
           <Button
             type="button"
@@ -200,6 +203,7 @@ function App() {
             Limpar finalizadas
           </Button>
         </Div>
+        <Div />
       </Form>
 
     </Main>
