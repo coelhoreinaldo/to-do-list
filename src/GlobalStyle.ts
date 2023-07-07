@@ -15,7 +15,8 @@ const GlobalStyle = createGlobalStyle`
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background: linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(1 15 26) 119.9%);
+    /* background-color: #242424; */
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -37,9 +38,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     display: flex;
     place-items: center;
-    min-width: 320px;
+    min-width: 280px;
     min-height: 100vh;
-    background-color: black;
+
     color: white;
   }
 

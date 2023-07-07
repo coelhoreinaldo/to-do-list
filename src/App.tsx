@@ -1,28 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
-
-const Main = styled.main`
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 160px;
-`;
-
-const List = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-`;
-
-const ListItem = styled.li<{ completed: boolean, isSelected: boolean }>`
-  text-decoration: ${(props) => (props.completed ? 'line-through' : 'none')};
-  background-color: ${(props) => (props.isSelected ? 'darkblue' : 'transparent')};
-
-`;
+import { Div, Form, Input, List, ListItem, Main } from './App';
 
 interface Task {
   id: number;
@@ -53,6 +31,7 @@ function App() {
       completed: false,
     };
     setTasks([...tasks, newTask]);
+    localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
     setTask('');
   };
 
@@ -69,25 +48,65 @@ function App() {
 
   const handleDeleteAll = () => {
     setTasks([]);
+    setSelectedId(null);
+    localStorage.setItem('tasks', JSON.stringify([]));
   };
 
   const handleClearCompleted = () => {
     const updatedTasks = tasks.filter((item) => !item.completed);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     setTasks(updatedTasks);
+    setSelectedId(null);
   };
+
+  const handleMoveUp = () => {
+    const selectedTask = tasks.find((item) => item.id === selectedId);
+    if (selectedTask) {
+      const selectedTaskIndex = tasks.indexOf(selectedTask);
+      if (selectedTaskIndex > 0) {
+        const updatedTasks = [...tasks];
+        const newIndex = selectedTaskIndex - 1;
+        updatedTasks.splice(selectedTaskIndex, 1);
+        updatedTasks.splice(newIndex, 0, selectedTask);
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      }
+    }
+  };
+
+  const handleMoveDown = () => {
+    const selectedTask = tasks.find((item) => item.id === selectedId);
+    if (selectedTask) {
+      const selectedTaskIndex = tasks.indexOf(selectedTask);
+      if (selectedTaskIndex < tasks.length - 1) {
+        const updatedTasks = [...tasks];
+        const newIndex = selectedTaskIndex + 1;
+        updatedTasks.splice(selectedTaskIndex, 1);
+        updatedTasks.splice(newIndex, 0, selectedTask);
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      }
+    }
+  };
+
+  useEffect(() => {
+    const storageTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    setTasks(storageTasks);
+  }, []);
 
   return (
     <Main>
       <Header />
-      <form onSubmit={ handleSubmit } onReset={ handleDeleteAll }>
-        <label>
-          <input
+      <Form onSubmit={ handleSubmit } onReset={ handleDeleteAll }>
+        <Div>
+          <Input
             type="text"
             placeholder="Digite uma tarefa..."
             onChange={ handleChange }
             value={ task }
           />
-        </label>
+          <button type="submit">Adicionar</button>
+        </Div>
         <List>
           {tasks.map((item) => (
             <ListItem
@@ -105,10 +124,34 @@ function App() {
             </ListItem>
           ))}
         </List>
-        <button type="submit">Adicionar</button>
-        <button type="reset">Deletar tudo</button>
-        <button type="button" onClick={ handleClearCompleted }>Limpar finalizadas</button>
-      </form>
+        <Div>
+          <button
+            type="button"
+            onClick={ handleMoveUp }
+            disabled={ !selectedId }
+          >
+            Mover para cima
+
+          </button>
+          <button
+            type="button"
+            onClick={ handleMoveDown }
+            disabled={ !selectedId }
+          >
+            Mover para baixo
+
+          </button>
+        </Div>
+        <Div>
+          <button type="reset">Deletar tudo</button>
+          <button
+            type="button"
+            onClick={ handleClearCompleted }
+          >
+            Limpar finalizadas
+          </button>
+        </Div>
+      </Form>
 
     </Main>
   );
