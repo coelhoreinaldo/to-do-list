@@ -85,12 +85,31 @@ export const Input = styled.input`
   };
 `;
 
+export const TaskContainer = styled(Div)`
+  display: flex;
+  align-items: center;
+`;
+
+export const Checkbox = styled.input`
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+  outline: none;
+  cursor: pointer;
+
+  &:checked {
+    background-color: #2196f3;
+    border-color: #2196f3;
+  }
+`;
+
 export const Label = styled.label<{ $completed: boolean }>`
-  text-decoration: ${(props) => (props.$completed && 'line-through')};
-  color: ${(props) => props.$completed && 'gray'};
+  text-decoration: ${(props) => (props.$completed ? 'line-through' : 'none')};
+  color: ${(props) => (props.$completed ? 'gray' : 'inherit')};
   font-size: 20px;
   margin: 0;
-
 `;
 
 export const Button = styled.button<{ $color?: string }>`

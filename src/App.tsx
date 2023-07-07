@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { AddTaskDiv,
   Button,
+  Checkbox,
   ConfigListButtons,
-  Div, Form, Input, Label, List, ListItem, ListItemButtons, Main } from './App';
+  Form,
+  Input,
+  Label, List, ListItem, ListItemButtons, Main, TaskContainer } from './App';
 
 interface Task {
   id: number;
@@ -60,6 +63,7 @@ function App() {
     const updatedTasks = tasks.map((item) => (
       item.id === +event.target.id ? { ...item, completed: !item.completed } : item
     ));
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     setTasks(updatedTasks);
   };
 
@@ -145,11 +149,12 @@ function App() {
               onClick={ () => handleSelected(item.id) }
               $isSelected={ selectedId === item.id }
             >
-              <Div>
-                <input
+              <TaskContainer>
+                <Checkbox
                   type="checkbox"
                   id={ `${item.id}` }
                   onChange={ handleUpdate }
+                  checked={ item.completed }
                 />
                 <Label
                   $completed={ item.completed }
@@ -157,7 +162,7 @@ function App() {
                   {item.name}
 
                 </Label>
-              </Div>
+              </TaskContainer>
               <ListItemButtons>
 
                 <Button
