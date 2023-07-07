@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
-import { Div, Form, Input, List, ListItem, Main } from './App';
+import { Button, Div, Form, Input, List, ListItem, Main } from './App';
 
 interface Task {
   id: number;
@@ -105,14 +105,14 @@ function App() {
             onChange={ handleChange }
             value={ task }
           />
-          <button type="submit">Adicionar</button>
+          <Button $color="green" type="submit">Adicionar</Button>
         </Div>
         <List>
           {tasks.map((item) => (
             <ListItem
               key={ item.id }
-              completed={ item.completed }
-              isSelected={ selectedId === item.id }
+              $completed={ item.completed }
+              $isSelected={ selectedId === item.id }
               onClick={ () => handleSelected(item.id) }
             >
               <input
@@ -125,31 +125,32 @@ function App() {
           ))}
         </List>
         <Div>
-          <button
+          <Button
             type="button"
             onClick={ handleMoveUp }
             disabled={ !selectedId }
           >
             Mover para cima
 
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={ handleMoveDown }
             disabled={ !selectedId }
           >
             Mover para baixo
 
-          </button>
+          </Button>
         </Div>
         <Div>
-          <button type="reset">Deletar tudo</button>
-          <button
+          <Button type="reset" $color="red">Deletar tudo</Button>
+          <Button
             type="button"
+            $color="green"
             onClick={ handleClearCompleted }
           >
             Limpar finalizadas
-          </button>
+          </Button>
         </Div>
       </Form>
 
