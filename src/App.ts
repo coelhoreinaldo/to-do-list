@@ -105,6 +105,7 @@ export const Button = styled.button<{ $color?: string }>`
 
   &:disabled {
     background-color: aliceblue;
+    color: black;
   }
 `;
 

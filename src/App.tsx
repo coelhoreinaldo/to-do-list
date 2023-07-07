@@ -12,9 +12,18 @@ function App() {
   const [task, setTask] = useState<string>('');
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [idToEdit, setIdToEdit] = useState<number | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
+  };
+
+  const handleUpdateSelected = (currTask: Task) => {
+    setIdToEdit(currTask.id);
+    const taskToBeUpdated = tasks.find((item) => item.id === currTask.id);
+    if (taskToBeUpdated) {
+      setTask(taskToBeUpdated.name);
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +31,15 @@ function App() {
 
     if (!task) {
       return;
+    }
+
+    if (idToEdit) {
+      const updatedTasks = tasks
+        .map((item) => (item.id === idToEdit ? { ...item, name: task } : item));
+      setTasks(updatedTasks);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      setIdToEdit(null);
+      return setTask('');
     }
 
     const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
@@ -89,6 +107,12 @@ function App() {
     }
   };
 
+  const handleDeleteSelected = (currTask:Task) => {
+    const updatedTasks = tasks.filter((item) => item !== currTask);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
   useEffect(() => {
     const storageTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
     setTasks(storageTasks);
@@ -105,7 +129,11 @@ function App() {
             onChange={ handleChange }
             value={ task }
           />
-          <Button $color="green" type="submit">Adicionar</Button>
+          <Button $color="green" type="submit">
+            {!idToEdit
+              ? 'Adicionar' : 'Editar'}
+
+          </Button>
         </Div>
         <List>
           {tasks.map((item) => (
@@ -121,6 +149,21 @@ function App() {
                 onChange={ handleUpdate }
               />
               <label>{item.name}</label>
+              <Button
+                type="button"
+                onClick={ () => handleUpdateSelected(item) }
+              >
+                Editar
+
+              </Button>
+              <Button
+                type="button"
+                $color="red"
+                onClick={ () => handleDeleteSelected(item) }
+              >
+                Delete
+
+              </Button>
             </ListItem>
           ))}
         </List>
