@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+    
   }
 
   :root {
@@ -16,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background: linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(1 15 26) 119.9%);
-    /* background-color: #242424; */
+    background-attachment: fixed;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;

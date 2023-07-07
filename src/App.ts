@@ -15,15 +15,19 @@ export const Form = styled.form`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   min-height: 260px;
   padding: 8px;
+  max-width: 460px;
 `;
 
 export const Div = styled.div`
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  justify-content: space-between;
   align-items: center;
   gap: 8px;
+`;
+
+export const ListItemButtons = styled(Div)`
+  justify-content: flex-end;
 `;
 
 export const List = styled.ul`
@@ -46,6 +50,8 @@ export const ListItem = styled.li<{ $completed: boolean, $isSelected: boolean }>
   text-align: left;
   border: 1px solid black;
   border: ${(props) => props.$isSelected && '1px solid red'};
+  display: flex;
+  justify-content: space-between;
 
 `;
 

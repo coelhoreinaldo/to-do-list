@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
-import { Button, Div, Form, Input, List, ListItem, Main } from './App';
+import { Button, Div, Form, Input, List, ListItem, ListItemButtons, Main } from './App';
 
 interface Task {
   id: number;
@@ -143,27 +143,32 @@ function App() {
               $isSelected={ selectedId === item.id }
               onClick={ () => handleSelected(item.id) }
             >
-              <input
-                type="checkbox"
-                id={ `${item.id}` }
-                onChange={ handleUpdate }
-              />
-              <label>{item.name}</label>
-              <Button
-                type="button"
-                onClick={ () => handleUpdateSelected(item) }
-              >
-                Editar
+              <Div>
+                <input
+                  type="checkbox"
+                  id={ `${item.id}` }
+                  onChange={ handleUpdate }
+                />
+                <label>{item.name}</label>
+              </Div>
+              <ListItemButtons>
 
-              </Button>
-              <Button
-                type="button"
-                $color="red"
-                onClick={ () => handleDeleteSelected(item) }
-              >
-                Delete
+                <Button
+                  type="button"
+                  onClick={ () => handleUpdateSelected(item) }
+                >
+                  Editar
 
-              </Button>
+                </Button>
+                <Button
+                  type="button"
+                  $color="red"
+                  onClick={ () => handleDeleteSelected(item) }
+                >
+                  Delete
+
+                </Button>
+              </ListItemButtons>
             </ListItem>
           ))}
         </List>
