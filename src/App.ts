@@ -6,17 +6,20 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   margin-top: 160px;
+  justify-content: fle;
 `;
 
 export const Form = styled.form`
-  border-radius: 16px;
+  border-radius: 6px;
   align-self: flex-start;
   background-color: #000082;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  min-height: 260px;
+  min-height: 460px;
   padding: 8px;
   max-width: 460px;
   min-width: 280px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Div = styled.div`
@@ -33,6 +36,11 @@ export const AddTaskDiv = styled(Div)`
 
 export const ListItemButtons = styled(Div)`
   justify-content: flex-end;
+  margin: 0 8px;
+`;
+
+export const ConfigListButtons = styled(Div)`
+margin-top: auto;
 `;
 
 export const List = styled.ul`
@@ -40,11 +48,12 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   padding: 0;
   gap: 4px;
   min-height: 100px;
-
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const ListItem = styled.li<{ $isSelected: boolean }>`
@@ -79,6 +88,9 @@ export const Input = styled.input`
 export const Label = styled.label<{ $completed: boolean }>`
   text-decoration: ${(props) => (props.$completed && 'line-through')};
   color: ${(props) => props.$completed && 'gray'};
+  font-size: 20px;
+  margin: 0;
+
 `;
 
 export const Button = styled.button<{ $color?: string }>`
@@ -97,7 +109,7 @@ export const Button = styled.button<{ $color?: string }>`
   line-height: 1.25;
   margin: 0;
   min-height: 3rem;
-  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  padding: calc(0.875rem - 1px) calc(1.33rem - 1px);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
@@ -107,7 +119,7 @@ export const Button = styled.button<{ $color?: string }>`
 
   &:hover,
   &:focus {
-    background-color: #fb8332;
+    background-color: #5676f5;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   }
 
@@ -116,7 +128,7 @@ export const Button = styled.button<{ $color?: string }>`
   }
 
   &:active {
-    background-color: #c85000;
+    background-color: #3e63f7;
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
     transform: translateY(0);
   }
@@ -125,6 +137,8 @@ export const Button = styled.button<{ $color?: string }>`
     background-color: aliceblue;
     color: black;
   }
+
+
 `;
 
 // Button by "Sketch" via https://getcssscan.com/css-buttons-examples?ref=beautifulboxshadow-bottom;

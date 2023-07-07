@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { AddTaskDiv,
-  Button, Div, Form, Input, Label, List, ListItem, ListItemButtons, Main } from './App';
+  Button,
+  ConfigListButtons,
+  Div, Form, Input, Label, List, ListItem, ListItemButtons, Main } from './App';
 
 interface Task {
   id: number;
@@ -130,7 +132,7 @@ function App() {
             onChange={ handleChange }
             value={ task }
           />
-          <Button $color="green" type="submit">
+          <Button $color="#14b34b" type="submit">
             {!idToEdit
               ? 'Adicionar' : 'Editar'}
 
@@ -160,30 +162,31 @@ function App() {
 
                 <Button
                   type="button"
+                  $color="#bfb006"
                   onClick={ () => handleUpdateSelected(item) }
                 >
-                  🖊
+                  <i className="ri-edit-fill" />
 
                 </Button>
                 <Button
                   type="button"
-                  $color="red"
+                  $color="#c2112f"
                   onClick={ () => handleDeleteSelected(item) }
                 >
-                  🗑
+                  <i className="ri-delete-bin-7-fill" />
 
                 </Button>
               </ListItemButtons>
             </ListItem>
           ))}
         </List>
-        <Div>
+        <ConfigListButtons>
           <Button
             type="button"
             onClick={ handleMoveUp }
             disabled={ !selectedId }
           >
-            ↑
+            <i className="ri-arrow-up-line" />
 
           </Button>
           <Button
@@ -191,19 +194,18 @@ function App() {
             onClick={ handleMoveDown }
             disabled={ !selectedId }
           >
-            ↓
+            <i className="ri-arrow-down-line" />
 
           </Button>
-          <Button type="reset" $color="red">Deletar tudo</Button>
+          <Button type="reset" $color="#c2112f">Deletar tudo</Button>
           <Button
             type="button"
-            $color="green"
+            $color="#14b34b"
             onClick={ handleClearCompleted }
           >
             Limpar finalizadas
           </Button>
-        </Div>
-        <Div />
+        </ConfigListButtons>
       </Form>
 
     </Main>
