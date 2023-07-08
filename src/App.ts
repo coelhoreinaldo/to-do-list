@@ -35,7 +35,6 @@ export const AddTaskDiv = styled(Div)`
 
 export const ListItemButtons = styled(Div)`
   justify-content: flex-end;
-  margin: 0 8px;
 `;
 
 export const ConfigListButtons = styled(Div)`
@@ -54,6 +53,7 @@ export const List = styled.ul`
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  margin: 4px 0;
 `;
 
 export const ListItem = styled.li<{ $isSelected: boolean }>`
@@ -68,7 +68,7 @@ export const ListItem = styled.li<{ $isSelected: boolean }>`
   border: ${(props) => props.$isSelected && '1px solid red'};
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  padding: 8px 8px;
 `;
 
 export const Input = styled.input`

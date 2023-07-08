@@ -8,6 +8,7 @@ const HeaderStyled = styled.header`
   background: transparent;
   color: white;
   width: 100%;
+  margin: 8px 0;
 `;
 
 const H1 = styled.h1`
