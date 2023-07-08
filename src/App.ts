@@ -6,7 +6,7 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   margin-top: 160px;
-  justify-content: fle;
+  justify-content: center;
 `;
 
 export const Form = styled.form`
@@ -25,7 +25,6 @@ export const Form = styled.form`
 export const Div = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  width: 100%;
   align-items: center;
   gap: 8px;
 `;
@@ -48,16 +47,18 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0;
+  padding: 8px 0 0;
   gap: 4px;
   min-height: 100px;
-  max-height: 600px;
-  overflow-y: scroll;
+  max-height: 580px;
+  width: 100%;
+  overflow-y: auto;
   overflow-x: hidden;
 `;
 
 export const ListItem = styled.li<{ $isSelected: boolean }>`
   background-color: ${(props) => props.$isSelected && 'purple'};
+  z-index: 100;
   transform: ${(props) => props.$isSelected && 'translateY(-6px)'};
   box-shadow: ${(props) => props.$isSelected && 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'};
   transition: all 250ms;
@@ -91,8 +92,8 @@ export const TaskContainer = styled(Div)`
 `;
 
 export const Checkbox = styled.input`
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   border: 2px solid #ccc;
   border-radius: 3px;
   margin-right: 10px;

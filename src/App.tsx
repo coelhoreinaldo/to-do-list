@@ -134,6 +134,7 @@ function App() {
             type="text"
             placeholder="Digite uma tarefa..."
             onChange={ handleChange }
+            maxLength={ 100 }
             value={ task }
           />
           <Button $color="#14b34b" type="submit">
