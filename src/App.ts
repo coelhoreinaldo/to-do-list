@@ -129,7 +129,7 @@ export const Button = styled.button<{ $color?: string }>`
   line-height: 1.25;
   margin: 0;
   min-height: 3rem;
-  padding: calc(0.875rem - 1px) calc(1.33rem - 1px);
+  padding: calc(0.875rem - 1px) calc(1.2rem - 1px);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
