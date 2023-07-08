@@ -46,14 +46,14 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 8px 0 0;
+  padding: 8px 0;
   gap: 4px;
   min-height: 100px;
   max-height: 580px;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 4px 0;
+  margin: 8px 0;
 `;
 
 export const ListItem = styled.li<{ $isSelected: boolean }>`
